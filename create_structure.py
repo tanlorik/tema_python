@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import locale
 
 
 def usage(error_msg=None):
@@ -23,7 +24,7 @@ def create_recursive(root, data):
         elif isinstance(data[item], str):
             file_path = os.path.join(root, item)
             with open(file_path, "wb") as f:
-                f.write(data[item].encode("ascii"))
+                f.write(data[item].encode(locale.getpreferredencoding()))
 
 
 def main():
@@ -38,7 +39,8 @@ def main():
     if not os.path.exists(json_file_path) or not os.path.isfile(json_file_path):
         usage("Invalid json_file_path")
     try:
-        json_data = json.loads(open(json_file_path, "r").read())
+        json_data = json.loads(
+            open(json_file_path, "r", encoding=locale.getpreferredencoding()).read())
     except:
         usage("Invalid json file")
 
