@@ -23,7 +23,7 @@ def create_recursive(root, data):
         elif isinstance(data[item], str):
             file_path = os.path.join(root, item)
             with open(file_path, "wb") as f:
-                f.write(data[item].decode(ascii))
+                f.write(data[item].encode("ascii"))
 
 
 def main():
