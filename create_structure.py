@@ -5,16 +5,29 @@ import locale
 
 
 def usage(error_msg=None):
+    '''
+    Print how to use the script then exit
+
+    error_msg: if set will print content. Used to express a certain error
+    '''
 
     if error_msg:
         print(error_msg)
 
     print("Usage:")
-    print("{} <root_folder_path> <json_file_path>")
+    print("{} <root_folder_path> <json_file_path>".format(__file__))
     exit(0)
 
 
 def create_recursive(root, data):
+    '''
+    Create the file/directory structure
+
+    root: current working path
+    data: a dictionary that contains what files/directories should be created in current folder
+
+
+    '''
 
     for item in data:
         if isinstance(data[item], dict):
@@ -28,6 +41,9 @@ def create_recursive(root, data):
 
 
 def main():
+    '''
+    Entry point of the program
+    '''
 
     if len(sys.argv) != 3:
         usage("Invalid number of parameters")
