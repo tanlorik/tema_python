@@ -1,0 +1,1 @@
+%~dp0\create_structure.py %~dp0\test_dir %~dp0\data.json 
