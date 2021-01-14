@@ -34,6 +34,14 @@ def create_recursive(root, data):
             new_root = os.path.join(root, item)
             if not os.path.exists(new_root):
                 os.mkdir(new_root)
+
+            # remove files not found in json file
+            existing = os.listdir(new_root)
+            for i in existing:
+                if os.path.isfile(os.path.join(new_root, i)):
+                    if not i in data[item]:
+                        os.unlink(os.path.join(new_root, i))
+
             create_recursive(new_root, data[item])
         elif isinstance(data[item], str):
             file_path = os.path.join(root, item)
