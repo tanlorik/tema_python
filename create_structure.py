@@ -32,10 +32,12 @@ def create_recursive(root, data):
     for item in data:
         if isinstance(data[item], dict):
             new_root = os.path.join(root, item)
-            os.mkdir(new_root)
+            if not os.path.exists(new_root):
+                os.mkdir(new_root)
             create_recursive(new_root, data[item])
         elif isinstance(data[item], str):
             file_path = os.path.join(root, item)
+            # I don't need to check for pre-existing files because they will be overwritten and the content will be updated
             with open(file_path, "wb") as f:
                 f.write(data[item].encode(locale.getpreferredencoding()))
 
